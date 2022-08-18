@@ -1,4 +1,14 @@
-#home-page{
+#home-page {
     background: url("../svg/home.svg") no-repeat center;
     background-size: cover;
+}
+
+#login-page {
+    background: url("../svg/login.svg") no-repeat center;
+    background-size: cover;
+}
+
+.form-control {
+    height: 50px;
+    font-size: 1.6rem;
 }
