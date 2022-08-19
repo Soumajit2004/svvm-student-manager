@@ -1,26 +1,28 @@
 {% extends 'bootstrap/base.html' %}
 {% import "bootstrap/wtf.html" as wtf %}
 
+{% block title %} Login {% endblock %}
+
 {% block content %}
     {% include "header.html" %}
 
 
     <div class="vh-100 d-flex align-items-center justify-content-center" id="login-page">
-        <div class="shadow p-3 mb-5 bg-body rounded d-flex align-items-center flex-column justify-content-evenly"
+        <div class="shadow p-3 mb-5 bg-white rounded d-flex align-items-center flex-column justify-content-around"
              style="height: 600px; width: 500px">
             <h1 style="font-size: 5.5rem">Login</h1>
 
-            <form class="d-flex flex-column gap-3 w-75 " action="/login" method="post">
+            <form class="d-flex flex-column h-50 w-75 justify-content-around" action="/login" method="post">
                 <div class="mb-3">
-                    {{ form.email(class_="form-control",
+                    {{ form.email(class_="form-control form-control-xl",
                                 placeholder="Email Address") }}
                 </div>
                 <div class="mb-3">
-                    {{ form.password(class_="form-control",
+                    {{ form.password(class_="form-control form-control-xl",
                                 type="password",
                                 placeholder="Password") }}
                 </div>
-                {{ form.submit(class="btn btn-primary form-control") }}
+                {{ form.submit(class="btn btn-primary form-control-xl") }}
                 <a href="/forgot-password" class="link-primary text-center">Forgot Password</a>
             </form>
         </div>

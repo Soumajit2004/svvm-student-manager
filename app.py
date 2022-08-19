@@ -1,9 +1,11 @@
 import os
+from functools import wraps
+
 from flask_bootstrap import Bootstrap
 from flask import Flask
 from flask import render_template, request, redirect, url_for, session
-from form import LoginForm
-from sql_connections import check_email_exists, check_valid_password, get_user_data
+from form import LoginForm, StudentSearchForm
+from sql_connections import check_email_exists, check_valid_password, get_user_data, get_all_students
 
 app = Flask(__name__)
 
@@ -11,6 +13,17 @@ SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
 bootstrap = Bootstrap(app)
+
+
+def protected_route(function):
+    @wraps(function)
+    def decorated_function(*args, **kwargs):
+        if "logged_in" in session:
+            return function(*args, **kwargs)
+
+        return redirect(url_for("login"))
+
+    return decorated_function
 
 
 @app.route('/')
@@ -43,16 +56,23 @@ def logout():
     session.pop('name', None)
     session.pop('email', None)
 
-    return redirect(url_for('login'))
+    return redirect(request.referrer)
 
 
 @app.route("/dashboard", methods=["GET"])
+@protected_route
 def dashboard():
+    return render_template("dashboard.html", nav_title="Dashboard")
 
-    if "logged_in" in session:
-        return render_template("dashboard.html", nav_title="Dashboard")
 
-    return redirect(url_for("login"))
+@app.route("/students", methods=["GET"])
+@protected_route
+def students():
+    form = StudentSearchForm()
+
+    all_students = get_all_students()
+
+    return render_template("students.html", nav_title="Students", all_students=all_students, form=form)
 
 
 if __name__ == '__main__':
