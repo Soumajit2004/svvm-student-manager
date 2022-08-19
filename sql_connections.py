@@ -1,10 +1,10 @@
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
 
-students_db = mysql.connector.connect(user="server",
-                                      password="gcp-server-mysql",
-                                      host="34.131.201.218",
-                                      database="students")
+students_db = mysql.connector.connect(user="sql6513769",
+                                      password="2aWYts84wC",
+                                      host="sql6.freesqldatabase.com",
+                                      database="sql6513769")
 cursor = students_db.cursor()
 
 
