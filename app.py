@@ -5,7 +5,7 @@ from flask_bootstrap import Bootstrap
 from flask import Flask
 from flask import render_template, request, redirect, url_for, session
 from form import LoginForm, StudentSearchForm
-from sql_connections import check_email_exists, check_valid_password, get_user_data, get_all_students
+from sql_connections import check_email_exists, check_valid_password, get_user_data, get_students
 
 app = Flask(__name__)
 
@@ -69,8 +69,15 @@ def dashboard():
 @protected_route
 def students():
     form = StudentSearchForm()
+    student_class = request.args.get("class")
+    student_name = request.args.get("name")
 
-    all_students = get_all_students()
+    if student_class:
+        all_students = get_students(student_class=student_class)
+    elif student_name:
+        all_students = get_students(name=student_name)
+    else:
+        all_students = get_students()
 
     return render_template("students.html", nav_title="Students", all_students=all_students, form=form)
 

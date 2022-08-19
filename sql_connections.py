@@ -45,8 +45,15 @@ def get_user_data(email, password):
     return ()
 
 
-def get_all_students():
-    query = "SELECT * FROM students ORDER BY class;"
+def get_students(student_class=None, name=None):
+
+    if name:
+        query = f"SELECT * FROM students WHERE name='{name}';"
+    elif student_class:
+        query = f"SELECT * FROM students WHERE class='{student_class}' ORDER BY class"
+    else:
+        query = "SELECT * FROM students ORDER BY class;"
+
     cursor.execute(query)
     result = cursor.fetchall()
 
