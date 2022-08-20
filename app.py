@@ -8,9 +8,7 @@ from form import LoginForm, StudentSearchForm
 from sql_connections import check_email_exists, check_valid_password, get_user_data, get_students
 
 app = Flask(__name__)
-
-SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", os.urandom(32))
 
 bootstrap = Bootstrap(app)
 
