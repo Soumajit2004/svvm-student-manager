@@ -13,17 +13,6 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", os.urandom(32))
 bootstrap = Bootstrap(app)
 
 
-def protected_route(function):
-    @wraps(function)
-    def decorated_function(*args, **kwargs):
-        if "logged_in" in session:
-            return function(*args, **kwargs)
-
-        return redirect(url_for("login"))
-
-    return decorated_function
-
-
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -58,25 +47,27 @@ def logout():
 
 
 @app.route("/dashboard", methods=["GET"])
-@protected_route
 def dashboard():
-    return render_template("dashboard.html", nav_title="Dashboard")
+    if "logged_in" in session:
+        return render_template("dashboard.html", nav_title="Dashboard")
+    else:
+        return redirect(url_for("login"))
 
 
 @app.route("/students", methods=["GET"])
-@protected_route
 def students():
-    form = StudentSearchForm()
-    student_class = request.args.get("class")
-    student_name = request.args.get("name")
+    if "logged_in" in session:
+        form = StudentSearchForm()
+        student_class = request.args.get("class")
+        student_name = request.args.get("name")
 
-    if student_class:
-        all_students = get_students(student_class=student_class)
-    elif student_name:
-        all_students = get_students(name=student_name)
+        if student_class:
+            all_students = get_students(student_class=student_class)
+        elif student_name:
+            all_students = get_students(name=student_name)
+        else:
+            all_students = get_students()
+
+        return render_template("students.html", nav_title="Students", all_students=all_students, form=form)
     else:
-        all_students = get_students()
-
-    return render_template("students.html", nav_title="Students", all_students=all_students, form=form)
-
-
+        return redirect(url_for("login"))
