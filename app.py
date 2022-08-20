@@ -80,5 +80,3 @@ def students():
     return render_template("students.html", nav_title="Students", all_students=all_students, form=form)
 
 
-if __name__ == '__main__':
-    app.run()
