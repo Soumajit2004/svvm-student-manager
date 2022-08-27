@@ -1,14 +1,12 @@
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block content %}
 {% include "header.html" %}
+{% include "navbar.html" %}
 
-<main class="container d-flex flex-column" style="gap: 10px">
+<div class="container d-flex flex-column" style="gap: 10px">
     <div class="d-flex">
         <div class="d-flex" style="gap: 10px;">
             <form action="/students" method="get" class="d-flex" style="gap: 10px;">
-                {{ form.name(class="form-control",
-                             placeholder="Student Name") }}
+                {{ form.name(class_="form-control",
+                                placeholder="Student Name") }}
                 {{ form.submit(class="btn btn-info") }}
             </form>
             <div class="dropdown">
@@ -24,8 +22,7 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-success ml-auto" href="students/new">
-            <i class="fa-solid fa-plus"></i>
+        <a class="btn btn-success ml-auto" href={{ url_for("new_student") }}>
             New Student
         </a>
     </div>
@@ -58,8 +55,7 @@
         {% endfor %}
         </tbody>
     </table>
-</main>
+</div>
 
 
 {% include "footer.html" %}
-{% endblock %}
