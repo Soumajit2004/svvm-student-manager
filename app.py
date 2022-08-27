@@ -18,6 +18,11 @@ def dashboard():
     return render_template("dashboard.html", nav_title="Dashboard")
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html", nav_title="About Project")
+
+
 @app.route("/students", methods=["GET"])
 def students():
     form = StudentSearchForm()
@@ -40,7 +45,7 @@ def new_students():
 
     if request.method == "POST":
 
-        return render_template("success.html", nav_title="New Student")
+        if form.validate():
+            return render_template("success.html", nav_title="New Student")
 
     return render_template("new_student.html", nav_title="New Student", form=form)
-
