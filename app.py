@@ -32,3 +32,14 @@ def students():
         all_students = get_students()
 
     return render_template("students.html", nav_title="Students", all_students=all_students, form=form)
+
+
+@app.route("/students/new", methods=["GET"])
+def new_student():
+    
+    return render_template("new_student.html", nav_title="New Student")
+
+
+@app.route("/students/new/sucess", methods=["GET"])
+def sucess():
+    return render_template("sucess.html", nav_title="Sucess")
