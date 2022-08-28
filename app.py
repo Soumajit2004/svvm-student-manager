@@ -1,10 +1,8 @@
 import os
-from functools import wraps
-
 from flask_bootstrap import Bootstrap
 from flask import Flask
-from flask import render_template, request, redirect, url_for, session
-from form import StudentSearchForm
+from flask import render_template, request, redirect, url_for
+from form import StudentSearchForm, StudentEditAddForm
 from sql_connections import get_students
 
 app = Flask(__name__)
@@ -34,12 +32,13 @@ def students():
     return render_template("students.html", nav_title="Students", all_students=all_students, form=form)
 
 
-@app.route("/students/new", methods=["GET"])
-def new_student():
-    
-    return render_template("new_student.html", nav_title="New Student")
+@app.route("/students/new", methods=["GET", "POST"])
+def add_students():
+    form = StudentEditAddForm()
+
+    return render_template("edit_add_students.html", nav_title="New Student", form=form)
 
 
-@app.route("/students/new/sucess", methods=["GET"])
-def sucess():
-    return render_template("sucess.html", nav_title="Sucess")
+@app.route("/students/edit/<id>", methods=["GET", "POST"])
+def edit_students(id):
+    return render_template("edit_add_students.html", nav_title="Edit Student")
