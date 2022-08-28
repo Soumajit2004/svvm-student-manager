@@ -1,7 +1,8 @@
 import os
 from flask_bootstrap import Bootstrap
 from flask import Flask
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
+
 from form import StudentSearchForm, StudentEditAddForm
 from sql_connections import get_students
 
@@ -14,6 +15,11 @@ bootstrap = Bootstrap(app)
 @app.route("/", methods=["GET"])
 def dashboard():
     return render_template("dashboard.html", nav_title="Dashboard")
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html", nav_title="About Project")
 
 
 @app.route("/students", methods=["GET"])
@@ -33,12 +39,13 @@ def students():
 
 
 @app.route("/students/new", methods=["GET", "POST"])
-def add_students():
+
+def new_students():
     form = StudentEditAddForm()
 
-    return render_template("edit_add_students.html", nav_title="New Student", form=form)
+    if request.method == "POST":
 
+        return render_template("success.html", nav_title="New Student")
 
-@app.route("/students/edit/<id>", methods=["GET", "POST"])
-def edit_students(id):
-    return render_template("edit_add_students.html", nav_title="Edit Student")
+    return render_template("new_student.html", nav_title="New Student", form=form)
+
