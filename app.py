@@ -1,9 +1,8 @@
 import os
-from functools import wraps
-
 from flask_bootstrap import Bootstrap
 from flask import Flask
 from flask import render_template, request, redirect, url_for, session
+
 from form import StudentSearchForm, StudentEditAddForm
 from sql_connections import get_students
 
@@ -40,6 +39,7 @@ def students():
 
 
 @app.route("/students/new", methods=["GET", "POST"])
+
 def new_students():
     form = StudentEditAddForm()
 
@@ -47,4 +47,4 @@ def new_students():
 
         return render_template("success.html", nav_title="New Student")
 
-    return render_template("new_student.html", nav_title="New Students", form=form)
+    return render_template("new_student.html", nav_title="New Student", form=form)
