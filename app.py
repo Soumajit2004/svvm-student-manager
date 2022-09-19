@@ -48,4 +48,3 @@ def new_students():
         return render_template("success.html", nav_title="New Student")
 
     return render_template("new_student.html", nav_title="New Student", form=form)
-
