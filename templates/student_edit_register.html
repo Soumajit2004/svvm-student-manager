@@ -2,6 +2,12 @@
 
 <div class="container">
     <form method="post" action="/students/new">
+        {{ form.csrf_token }}
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
         <div class="form-row">
             <div class="col">
                 <label for="name">Name</label>
