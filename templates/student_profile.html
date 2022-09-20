@@ -3,7 +3,10 @@
 
     <div class="container">
         <div class="alert alert-info" role="alert">
-            <h4 class="alert-heading">Student details</h4>
+            <div class="d-flex">
+                <h4 class="alert-heading mr-auto">Student details</h4>
+                <a href="{{ data[0] }}/edit-marks" class="btn btn-primary">Edit Marks</a>
+            </div>
             <hr>
             <div class="row my-2">
                 <div class="col-12 col-lg-6">
@@ -51,7 +54,6 @@
                 <thead>
                 <tr>
                     <th scope="col">Sub/Tests</th>
-                    <th scope="col">FM</th>
                     <th scope="col">Science</th>
                     <th scope="col">Maths</th>
                     <th scope="col">SSC</th>
@@ -61,54 +63,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">MT-1</th>
-                </tr>
-                <tr>
-                    <th scope="row">MT-2</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-3</th>
-                </tr>
-                <tr>
-                     <th scope="row">UT-1</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-4</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-5</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-6</th>
-                </tr>
-                <tr>
-                     <th scope="row">Mid-Term</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-7</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-8</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-9</th>
-                </tr>
-                 <tr>
-                     <th scope="row">UT-2</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-10</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-11</th>
-                </tr>
-                <tr>
-                     <th scope="row">MT-12</th>
-                </tr>
-                <tr>
-                     <th scope="row">Final-Term</th>
-                </tr>
+                {% for exam in marks_data %}
+                    <tr>
+                        {% for code in exam_codes %}
+                            {% if code[0] == exam %}
+                                <th scope="row">{{ code[1] }}</th>
+                            {% endif %}
+                        {% endfor %}
+                        <td>{% if marks_data[exam]["sci"] %}{{ marks_data[exam]["sci"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["math"] %}{{ marks_data[exam]["math"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["ssc"] %}{{ marks_data[exam]["ssc"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["eng"] %}{{ marks_data[exam]["eng"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["ben"] %}{{ marks_data[exam]["ben"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["comp"] %}{{ marks_data[exam]["comp"] }}{% else %}-{% endif %}</td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
