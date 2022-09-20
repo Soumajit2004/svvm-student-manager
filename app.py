@@ -2,6 +2,7 @@ import os
 from flask_bootstrap import Bootstrap
 from flask import Flask
 from flask import render_template, request, redirect, url_for, session
+
 from form import StudentSearchForm, StudentEditAddForm
 from sql_connections import get_students, register_student, validate_new_student, \
     get_student_details, delete_student_sql
@@ -39,6 +40,7 @@ def students():
 
 
 @app.route("/students/new", methods=["GET", "POST"])
+
 def new_students():
     form = StudentEditAddForm()
 
