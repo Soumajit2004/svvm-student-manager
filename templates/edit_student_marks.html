@@ -1,0 +1,59 @@
+{% block content %}
+    {% include "header.html" %}
+    <form action="/students/{{ data[0] }}/edit-marks?exam={{ selected_exam }}" method="post" class="container">
+        {{ form.csrf_token }}
+        <div class="form-row">
+            <div class="alert alert-dark w-100 d-flex align-items-center">
+                <label for="exam_s" class="mr-3">
+                    Exam:
+                </label>
+                <select name="exam_s" class="form-control" id="exam_s" onchange="location = this.value">
+                    {% for e in exam_code %}
+                        <option value="/students/{{ data[0] }}/edit-marks?exam={{ e[0] }}"
+                                {% if e[0] == selected_exam %} selected {% endif %}>
+                            {{ e[1] }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            {% for code in sub_codes[:3] %}
+                <div class="col-12 col-lg-4">
+                    <label class="w-100">
+                        {{ code[1] }}
+                        <input id={{ code[0] }} name={{ code[0] }}
+                               value="{% if marks_data[code[0]] %}{{ marks_data[code[0]] }}{% else %}0{% endif %}"
+                               type="number"
+                               class="form-control">
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="form-row">
+            {% for code in sub_codes[3:] %}
+                <div class="col-12 col-lg-4">
+                    <label class="w-100">
+                        {{ code[1] }}
+                        <input id={{ code[0] }} name={{ code[0] }}
+                               value="{% if marks_data[code] %}{{ marks_data[code] }}{% else %}0{% endif %}"
+                               type="number"
+                               class="form-control">
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="form-row d-flex align-items-center justify-content-center">
+            <button class="btn btn-success" type="submit">
+                Save
+            </button>
+            <a href='{{ "/students/" ~ data[0] }}' class="btn btn-warning ml-3">
+                Back
+            </a>
+        </div>
+    </form>
+
+    {% include "footer.html" %}
+{% endblock %}

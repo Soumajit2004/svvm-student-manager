@@ -19,3 +19,14 @@ class StudentEditAddForm(FlaskForm):
     mother_mobile_no = StringField("Mother's Mobile No", validators=[DataRequired(), Length(min=10, max=10)])
     address = StringField("Address", validators=[DataRequired(), Length(max=500)])
     submit = SubmitField("Save")
+
+
+class MarksEditForm(FlaskForm):
+    exam_s = StringField("Select Exam")
+    sci = IntegerField('Science', validators=[])
+    eng = IntegerField('English', validators=[])
+    math = IntegerField('Mathematics', validators=[])
+    ssc = IntegerField('Social Science', validators=[])
+    ben = IntegerField('Bengali', validators=[])
+    comp = IntegerField('Computer', validators=[])
+    submit = SubmitField("Save")

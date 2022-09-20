@@ -40,7 +40,7 @@
         <tbody>
         {% for data in all_students %}
             <tr>
-                <th scope="row">{{ data[0] }}</th>
+                <th scope="row">{{ (string ~ data[0])[:6] }}...</th>
                 <td>{{ data[1] }}</td>
                 <td>{{ data[2] }}</td>
                 <td>{{ data[-1] }}</td>
