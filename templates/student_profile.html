@@ -1,11 +1,20 @@
 {% block content %}
     {% include "header.html" %}
+    <style>
+    @media print {
+        body *:not(#dropdownMenuButton):not(#navbarResponsive)*}{
+    visibility:hidden;
 
-    <div class="container">
+    }
+    </style>
+<body>
+    <div class="container print-container">
         <div class="alert alert-info" role="alert">
             <div class="d-flex">
                 <h4 class="alert-heading mr-auto">Student details</h4>
-                <a href="{{ data[0] }}/edit-marks" class="btn btn-primary">Edit Marks</a>
+                  <b onclick="window.print()" class="btn btn-success mr-3 ">Print</b>
+                <a href="{{ data[0] }}/edit-marks" class="btn btn-primary ">Edit Marks</a>
+
             </div>
             <hr>
             <div class="row my-2">
@@ -82,6 +91,6 @@
             </table>
         </div>
     </div>
-
+</body>
     {% include "footer.html" %}
 {% endblock %}
