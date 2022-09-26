@@ -4,3 +4,4 @@
 /Scripts/
 /sms_datagrip_project/
 /env/
+*.pyc
