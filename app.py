@@ -143,4 +143,5 @@ def edit_student_marks(student_id):
 @app.route("/students/<int:student_id>/delete", methods=["GET"])
 def delete_student(student_id):
     delete_student_sql(student_id)
+
     return redirect(url_for("students"))
