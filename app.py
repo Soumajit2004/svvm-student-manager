@@ -17,11 +17,6 @@ csrf = CSRFProtect(app)
 csrf.init_app(app)
 
 
-@app.route("/", methods=["GET"])
-def dashboard():
-    return render_template("dashboard.html", nav_title="Dashboard")
-
-
 @app.route("/about")
 def about():
     return render_template("about.html", nav_title="About Project")
@@ -144,4 +139,9 @@ def edit_student_marks(student_id):
 def delete_student(student_id):
     delete_student_sql(student_id)
 
+    return redirect(url_for("students"))
+
+
+@app.errorhandler(404)
+def own_404_page(error):
     return redirect(url_for("students"))
