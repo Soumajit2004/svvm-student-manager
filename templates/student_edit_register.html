@@ -2,13 +2,13 @@
 
 <div class="container">
     <form method="post" {% if edit_data %} action={{ "/students/" ~ edit_data[0] ~ "/edit" }} {% else %} action="/students/new" {% endif %}>
-        {{ form.csrf_token }}
         {% if error %}
             <div class="alert alert-danger" role="alert">
                 {{ error }}
             </div>
         {% endif %}
         {% if edit_data %}
+        {{ form.csrf_token }}
             <div class="form-row">
                 <div class="col">
                     <label for="name">Name</label>
@@ -59,6 +59,7 @@
             <input id="roll_no" name="roll_no" type="hidden" value="1">
             <button type="submit" name="submit" class="btn btn-primary mt-3">Update Student</button>
         {% else %}
+        {{ form.csrf_token }}
             <div class="form-row">
                 <div class="col">
                     <label for="name">Name</label>
@@ -124,7 +125,6 @@
             </div>
             <button type="submit" name="submit" class="btn btn-primary mt-3">Register Student</button>
         {% endif %}
-
     </form>
 </div>
 
