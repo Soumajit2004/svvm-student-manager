@@ -1,10 +1,9 @@
 import os
-
+from flask_wtf.csrf import CSRFProtect
 from data import sub_codes_map, exam_code_map
 from flask_bootstrap import Bootstrap
 from flask import Flask
 from flask import render_template, request, redirect, url_for, session
-
 from form import StudentSearchForm, StudentEditAddForm, MarksEditForm
 from sql_connections import get_students, register_student, validate_new_student, \
     get_student_details, delete_student_sql, update_student_details, update_student_marks
@@ -13,6 +12,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", os.urandom(32))
 
 bootstrap = Bootstrap(app)
+csrf = CSRFProtect(app)
+
+csrf.init_app(app)
 
 
 @app.route("/", methods=["GET"])
@@ -141,4 +143,5 @@ def edit_student_marks(student_id):
 @app.route("/students/<int:student_id>/delete", methods=["GET"])
 def delete_student(student_id):
     delete_student_sql(student_id)
+
     return redirect(url_for("students"))
