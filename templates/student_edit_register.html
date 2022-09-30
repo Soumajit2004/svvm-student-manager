@@ -2,6 +2,7 @@
 
 <div class="container">
     <form method="post" {% if edit_data %} action={{ "/students/" ~ edit_data[0] ~ "/edit" }} {% else %} action="/students/new" {% endif %}>
+        {{ form.csrf_token }}
         {% if error %}
             <div class="alert alert-danger" role="alert">
                 {{ error }}
