@@ -1,0 +1,96 @@
+{% block content %}
+    {% include "header.html" %}
+    <style>
+    @media print {
+        body *:not(#dropdownMenuButton):not(#navbarResponsive)*}{
+    visibility:hidden;
+
+    }
+    </style>
+<body>
+    <div class="container print-container">
+        <div class="alert alert-info" role="alert">
+            <div class="d-flex">
+                <h4 class="alert-heading mr-auto">Student details</h4>
+                  <b onclick="window.print()" class="btn btn-success mr-3 ">Print</b>
+                <a href="{{ data[0] }}/edit-marks" class="btn btn-primary ">Edit Marks</a>
+
+            </div>
+            <hr>
+            <div class="row my-2">
+                <div class="col-12 col-lg-6">
+                    Student ID: {{ data[0] }}
+                </div>
+                <div class="col-12 col-lg-6">
+                    Name: {{ data[1] }}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-12 col-lg-6">
+                    Class: {{ data[2] }}
+                </div>
+                <div class="col-12 col-lg-6">
+                    Roll No: {{ data[-1] }}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-12 col-lg-6">
+                    Father's Name: {{ data[3] }}
+                </div>
+                <div class="col-12 col-lg-6">
+                    Mother's Name: {{ data[4] }}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-12 col-lg-6">
+                    Father's Mobile No: +91 {{ data[-3] }}
+                </div>
+                <div class="col-12 col-lg-6">
+                    Mother's Mobile No: +91 {{ data[-2] }}
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-12">
+                    Address: {{ data[-4] }}
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <hr>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Sub/Tests</th>
+                    <th scope="col">Science</th>
+                    <th scope="col">Maths</th>
+                    <th scope="col">SSC</th>
+                    <th scope="col">English</th>
+                    <th scope="col">Bengali</th>
+                    <th scope="col">Computer</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for exam in marks_data %}
+                    <tr>
+                        {% for code in exam_codes %}
+                            {% if code[0] == exam %}
+                                <th scope="row">{{ code[1] }}</th>
+                            {% endif %}
+                        {% endfor %}
+                        <td>{% if marks_data[exam]["sci"] %}{{ marks_data[exam]["sci"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["math"] %}{{ marks_data[exam]["math"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["ssc"] %}{{ marks_data[exam]["ssc"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["eng"] %}{{ marks_data[exam]["eng"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["ben"] %}{{ marks_data[exam]["ben"] }}{% else %}-{% endif %}</td>
+                        <td>{% if marks_data[exam]["comp"] %}{{ marks_data[exam]["comp"] }}{% else %}-{% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+    {% include "footer.html" %}
+{% endblock %}
