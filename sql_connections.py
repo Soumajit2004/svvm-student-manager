@@ -93,8 +93,8 @@ def get_student_details(student_id):
 
 
 def delete_student_sql(student_id):
-    query = f"DELETE FROM students WHERE id={student_id}"
-    cursor.execute(query)
     query = f"DELETE FROM marks WHERE id_fk={student_id}"
+    cursor.execute(query)
+    query = f"DELETE FROM students WHERE id={student_id}"
     cursor.execute(query)
     students_db.commit()
