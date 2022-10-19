@@ -38,6 +38,7 @@ def students():
     return render_template("students.html", nav_title="Students", all_students=all_students, form=form)
 
 
+@csrf.exempt
 @app.route("/students/new", methods=["GET", "POST"])
 def new_students():
     form = StudentEditAddForm()
