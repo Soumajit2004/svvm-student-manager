@@ -39,7 +39,6 @@ def students():
 
 
 @app.route("/students/new", methods=["GET", "POST"])
-@csrf.exempt
 def new_students():
     form = StudentEditAddForm()
 
