@@ -1,13 +1,6 @@
 {% block content %}
     {% include "header.html" %}
-    <style>
-    @media print {
-        body *:not(#dropdownMenuButton):not(#navbarResponsive)*}{
-    visibility:hidden;
 
-    }
-    </style>
-<body>
     <div class="container print-container">
         <div class="alert alert-info" role="alert">
             <div class="d-flex">
@@ -91,6 +84,5 @@
             </table>
         </div>
     </div>
-</body>
     {% include "footer.html" %}
 {% endblock %}

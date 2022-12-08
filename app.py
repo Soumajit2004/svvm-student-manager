@@ -4,17 +4,26 @@ from data import sub_codes_map, exam_code_map
 from flask_bootstrap import Bootstrap
 from flask import Flask
 from flask import render_template, request, redirect, url_for, session
+from flaskwebgui import FlaskUI
 from form import StudentSearchForm, StudentEditAddForm, MarksEditForm
 from sql_connections import get_students, register_student, validate_new_student, \
     get_student_details, delete_student_sql, update_student_details, update_student_marks
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", os.urandom(32))
+ui = FlaskUI(app, width=1080, height=720)
 
 bootstrap = Bootstrap(app)
 csrf = CSRFProtect(app)
 
 csrf.init_app(app)
+
+app.config['SESSION_COOKIE_SECURE'] = False
+
+
+@app.route("/dumb")
+def dumb():
+    return {"status": "ok"}
 
 
 @app.route("/about")
@@ -45,14 +54,17 @@ def new_students():
     if request.method == "POST":
         error = "Class and Roll No combination already exists"
         if form.validate_on_submit() & validate_new_student(form.grade.data, form.roll_no.data):
-            register_student(name=form.name.data,
-                             grade=form.grade.data,
-                             father_name=form.father_name.data,
-                             mother_name=form.mother_name.data,
-                             father_phone=form.father_mobile_no.data,
-                             mother_phone=form.mother_mobile_no.data,
-                             roll=form.roll_no.data,
-                             address=form.address.data)
+            try:
+                register_student(name=form.name.data,
+                                 grade=form.grade.data,
+                                 father_name=form.father_name.data,
+                                 mother_name=form.mother_name.data,
+                                 father_phone=form.father_mobile_no.data,
+                                 mother_phone=form.mother_mobile_no.data,
+                                 roll=form.roll_no.data,
+                                 address=form.address.data)
+            except:
+                print("Error")
 
             return render_template("success.html", nav_title="New Student")
         else:
@@ -145,3 +157,7 @@ def delete_student(student_id):
 @app.errorhandler(404)
 def own_404_page(error):
     return redirect(url_for("students"))
+
+
+if __name__ == '__main__':
+    ui.run()

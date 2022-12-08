@@ -1,7 +1,9 @@
 {% include "header.html" %}
 
 <div class="container">
-    <form method="post" {% if edit_data %} action={{ "/students/" ~ edit_data[0] ~ "/edit" }} {% else %} action="/students/new" {% endif %}>
+    <form method="post" {% if edit_data %}
+          action={{ "/students/" ~ edit_data[0] ~ "/edit" }} {% else %} action="/students/new" {% endif %}>
+        {{ form.hidden_tag() }}
         {{ form.csrf_token() }}
         {% if error %}
             <div class="alert alert-danger" role="alert">

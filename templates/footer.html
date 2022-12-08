@@ -1,7 +1,30 @@
 <!-- JavaScript Bundle with Popper -->
 <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script>
 
+    document.addEventListener('DOMContentLoaded', function () {
+
+        function keep_alive_server() {
+            fetch("/dumb", {
+                method: 'GET',
+                cache: 'no-cache'
+            })
+                .then(res => {
+                })
+                .catch(err => {
+                })
+        }
+
+        try {
+            setInterval(keep_alive_server, 3 * 1000)()
+        } catch (error) {
+            // doesn't matter handled by middleware
+        }
+
+    })
+
+</script>
 </body>
 
 </html>

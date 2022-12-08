@@ -1,13 +1,11 @@
-from pprint import pprint
-
 import mysql.connector
+import shortuuid
 from data import exam_code_map, sub_codes_map
-import uuid
 
-students_db = mysql.connector.connect(user="sql6520785",
-                                      password="gVBlZdazDt",
+students_db = mysql.connector.connect(user="sql6582490",
+                                      password="qjrHzqiSxg",
                                       host="sql6.freesqldatabase.com",
-                                      database="sql6520785")
+                                      database="sql6582490")
 cursor = students_db.cursor()
 
 
@@ -19,10 +17,10 @@ def get_students(student_class=None, name=None):
     else:
         query = "SELECT * FROM students ORDER BY class;"
 
+    cursor.reset()
     cursor.execute(query)
     result = cursor.fetchall()
 
-    print(result)
     if len(result) > 0:
         return result
     else:
@@ -36,16 +34,19 @@ def register_student(name, grade,
                      mother_phone,
                      roll,
                      address):
-    id = uuid.uuid4()
-    query = f"INSERT INTO students (`id`, `name`, `class`, `father_name`, `mother_name`, `address`, `father_no`, `mother_no`, `roll_no`)  VALUES ('{id}', '{name}', '{grade}', '{father_name}', '{mother_name}', '{address}', '{father_phone}', '{mother_phone}', '{roll}')"
+    cursor.reset()
+    unique_id = shortuuid.ShortUUID(alphabet="0123456789").random(length=5)
+    query = f"INSERT INTO students (`id`, `name`, `class`, `father_name`, `mother_name`, `address`, `father_no`, `mother_no`, `roll_no`)  VALUES ('{unique_id}', '{name}', '{grade}', '{father_name}', '{mother_name}', '{address}', '{father_phone}', '{mother_phone}', '{roll}')"
     cursor.execute(query)
-    for sub in sub_codes_map:
-        query = f"INSERT INTO marks (`id_fk`, `sub_code`) VALUES ('{id}', '{sub[0]}')"
-        cursor.execute(query)
     students_db.commit()
+    for sub in sub_codes_map:
+        query = f"INSERT INTO marks (`id_fk`, `sub_code`) VALUES ('{unique_id}', '{sub[0]}')"
+        cursor.execute(query)
+        students_db.commit()
 
 
 def validate_new_student(grade, roll):
+    cursor.reset()
     query = f"SELECT * FROM students WHERE class='{grade}' AND roll_no='{roll}'"
     cursor.execute(query)
     result = cursor.fetchall()
@@ -57,6 +58,7 @@ def validate_new_student(grade, roll):
 
 
 def update_student_details(student_id, name, father_name, mother_name, father_phone, mother_phone, address):
+    cursor.reset()
     query = f"UPDATE students SET name='{name}', father_name='{father_name}', mother_name='{mother_name}'," \
             f" address='{address}', father_no='{father_phone}', mother_no='{mother_phone}' WHERE id={student_id}"
     cursor.execute(query)
@@ -64,13 +66,15 @@ def update_student_details(student_id, name, father_name, mother_name, father_ph
 
 
 def update_student_marks(student_id, exam_id, marks_map):
+    cursor.reset()
     for subjects in marks_map:
         query = f"UPDATE marks SET {exam_id}='{subjects[1]}' WHERE id_fk={student_id} AND sub_code='{subjects[0]}'"
         cursor.execute(query)
-    students_db.commit()
+        students_db.commit()
 
 
 def get_student_details(student_id):
+    cursor.reset()
     query = f"SELECT * FROM students WHERE id={student_id}"
     cursor.execute(query)
     result = cursor.fetchall()
@@ -93,6 +97,7 @@ def get_student_details(student_id):
 
 
 def delete_student_sql(student_id):
+    cursor.reset()
     query = f"DELETE FROM marks WHERE id_fk={student_id}"
     cursor.execute(query)
     query = f"DELETE FROM students WHERE id={student_id}"
