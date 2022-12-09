@@ -11,7 +11,6 @@ from sql_connections import get_students, register_student, validate_new_student
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", os.urandom(32))
-ui = FlaskUI(app, width=1080, height=720)
 
 bootstrap = Bootstrap(app)
 csrf = CSRFProtect(app)
@@ -159,5 +158,18 @@ def own_404_page(error):
     return redirect(url_for("students"))
 
 
-if __name__ == '__main__':
-    ui.run()
+def start_flask(**server_kwargs):
+    local_app = server_kwargs.pop("app", None)
+    server_kwargs.pop("debug", None)
+
+    try:
+        import waitress
+        waitress.serve(local_app, **server_kwargs)
+    except:
+        local_app.run(**server_kwargs)
+
+
+if __name__ == "__main__":
+    FlaskUI(app,
+            width=1080,
+            height=720).run()
