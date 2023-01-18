@@ -158,17 +158,6 @@ def own_404_page(error):
     return redirect(url_for("students"))
 
 
-def start_flask(**server_kwargs):
-    local_app = server_kwargs.pop("app", None)
-    server_kwargs.pop("debug", None)
-
-    try:
-        import waitress
-        waitress.serve(local_app, **server_kwargs)
-    except:
-        local_app.run(**server_kwargs)
-
-
 if __name__ == "__main__":
     FlaskUI(app,
             width=1080,

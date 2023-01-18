@@ -2,29 +2,25 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "SVVM Exam ERP"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1"
 #define MyAppPublisher "Proton Tech"
-#define MyAppURL "https://www.example.com/"
 #define MyAppExeName "Exam-ERP.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{25C76FF6-9A5F-49DF-B9AE-1CE7C0571993}
+AppId={{7CEE1CA7-7859-4A5F-8A97-ED8FE0D49118}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
-AppPublisherURL={#MyAppURL}
-AppSupportURL={#MyAppURL}
-AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=F:\Python Projects\student_management_system\installer
+OutputDir=E:\Python Projects\student_management_system\installer
 OutputBaseFilename=SVVM Exam ERP Installer
-SetupIconFile=F:\Python Projects\student_management_system\static\img\icon.ico
+SetupIconFile=E:\Python Projects\student_management_system\static\img\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -36,8 +32,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "F:\Python Projects\student_management_system\dist\Exam-ERP\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "F:\Python Projects\student_management_system\dist\Exam-ERP\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\Python Projects\student_management_system\dist\Exam-ERP\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\Python Projects\student_management_system\dist\Exam-ERP\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
