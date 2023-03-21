@@ -1,3 +1,10 @@
+
+# This Project is now Dead. It served its purpose
+# the database has been deleted.
+#
+# 👋 Signing off, Soumajit Ghosh - 21/03/2023
+
+
 import os
 from flask_wtf.csrf import CSRFProtect
 from data import sub_codes_map, exam_code_map
