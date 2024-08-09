@@ -1,17 +1,12 @@
-
-# This Project is now Dead. It served its purpose
-# the database has been deleted.
-#
-# 👋 Signing off, Soumajit Ghosh - 21/03/2023
-
-
 import os
-from flask_wtf.csrf import CSRFProtect
-from data import sub_codes_map, exam_code_map
-from flask_bootstrap import Bootstrap
+
 from flask import Flask
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for
+from flask_bootstrap import Bootstrap
+from flask_wtf.csrf import CSRFProtect
 from flaskwebgui import FlaskUI
+
+from data import sub_codes_map, exam_code_map
 from form import StudentSearchForm, StudentEditAddForm, MarksEditForm
 from sql_connections import get_students, register_student, validate_new_student, \
     get_student_details, delete_student_sql, update_student_details, update_student_marks
@@ -69,7 +64,7 @@ def new_students():
                                  mother_phone=form.mother_mobile_no.data,
                                  roll=form.roll_no.data,
                                  address=form.address.data)
-            except:
+            except Exception:
                 print("Error")
 
             return render_template("success.html", nav_title="New Student")
@@ -161,7 +156,7 @@ def delete_student(student_id):
 
 
 @app.errorhandler(404)
-def own_404_page(error):
+def own_404_page(_error):
     return redirect(url_for("students"))
 
 

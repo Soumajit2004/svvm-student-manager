@@ -2,10 +2,11 @@ import mysql.connector
 import shortuuid
 from data import exam_code_map, sub_codes_map
 
-students_db = mysql.connector.connect(user="sql6582490",
-                                      password="qjrHzqiSxg",
-                                      host="sql6.freesqldatabase.com",
-                                      database="sql6582490")
+students_db = mysql.connector.connect(user="root",
+                                      password="strong_password",
+                                      host="127.0.0.1",
+                                      port=3307,
+                                      database="sms")
 cursor = students_db.cursor()
 
 
@@ -13,7 +14,7 @@ def get_students(student_class=None, name=None):
     if name:
         query = f"SELECT * FROM students WHERE name='{name}';"
     elif student_class:
-        query = f"SELECT * FROM students WHERE class='{student_class}' ORDER BY class"
+        query = f"SELECT * FROM students WHERE class='{student_class}' ORDER BY class;"
     else:
         query = "SELECT * FROM students ORDER BY class;"
 
@@ -82,7 +83,7 @@ def get_student_details(student_id):
     if len(result) > 0:
         r = {}
         for exam in exam_code_map:
-            query = f"SELECT sub_code, {exam[0]} FROM marks WHERE id_fk={student_id}"
+            query = f"SELECT sub_code, {exam[0]} FROM marks WHERE id_fk={student_id};"
             cursor.execute(query)
             marks_result = cursor.fetchall()
 

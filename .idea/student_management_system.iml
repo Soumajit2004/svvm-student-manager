@@ -9,15 +9,16 @@
       <excludeFolder url="file://$MODULE_DIR$/Scripts" />
       <excludeFolder url="file://$MODULE_DIR$/sms_datagrip_project" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.11 (student_management_system) (2)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.13 (Student-Management-System)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../student_management_system\templates" />
+        <option value="$MODULE_DIR$/templates" />
       </list>
     </option>
   </component>
