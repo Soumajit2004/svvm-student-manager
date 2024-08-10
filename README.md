@@ -15,6 +15,59 @@ This is a simple ERP (Enterprise Resource Planning) system designed for small sc
 - Frontend: HTML, CSS
 - Database: MySQL
 
+## Requirements
+
+- Python
+- Docker
+
+## Setup Locally
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/Soumajit2004/svvm-student-manager.git
+   ```
+
+2. Run MySQL in Docker:
+   ```
+   docker run -d --name test-mysql -e MYSQL_ROOT_PASSWORD=strong_password -p 3307:3306 mysql
+   ```
+
+3. Access the MySQL container:
+   ```
+   docker exec -it test-mysql bash
+   ```
+
+4. Connect to MySQL:
+   ```
+   mysql --host=127.0.0.1 --port=3307 -u root -p
+   ```
+
+5. Create the necessary database and tables by running the migration script:
+   ```
+   mysql> source [PATH_TO_MIGRATION_SQL_FILE]
+   ```
+
+6. Install the required Python dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+7. Create a `.env` file in the root directory and add the necessary environment variables. You can use the `.env.example` file in the repository as a template.
+
+8. Run the application:
+   - For development:
+     ```
+     python app.py
+     ```
+   - For production:
+     ```
+     gunicorn --bind 0.0.0.0:5000 wsgi:app
+     ```
+
+9. Access the application through your web browser at `http://localhost:5000`
+
+For a detailed guide on installing MySQL with Docker, refer to this external resource: [Set Up and Configure MySQL in Docker](https://www.datacamp.com/tutorial/set-up-and-configure-mysql-in-docker)
+
 ## Usage
 
 1. Register new students using the registration form.
@@ -22,12 +75,25 @@ This is a simple ERP (Enterprise Resource Planning) system designed for small sc
 3. Enter marks for different subjects and tests.
 4. View academic performance reports.
 
-## Live Demo
+## Screenshots
 
-[Insert live project link here when available]
+The repository includes several screenshots demonstrating key features of the application:
+
+1. Student Registration Form
+2. Student Profile View
+3. Marks Entry Interface
+4. Academic Performance Report
+
+
+
+These screenshots provide a visual overview of the system's functionality and user interface.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Contact
 
-[Your Name] - [Your Email]
+Soumajit Ghosh - soumojitghosh02@gmail.com
 
-Project Link: [Insert repository URL]
+Project Link: https://github.com/Soumajit2004/svvm-student-manager
