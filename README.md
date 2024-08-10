@@ -79,12 +79,20 @@ For a detailed guide on installing MySQL with Docker, refer to this external res
 
 The repository includes several screenshots demonstrating key features of the application:
 
-1. Student Registration Form
-2. Student Profile View
-3. Marks Entry Interface
-4. Academic Performance Report
+1. Dashboard Screen
+![dashboard](https://github.com/Soumajit2004/svvm-student-manager/blob/f0d324a2c697e206969a64390d50b6b6511553e1/screenshots/dashboard_screen.png?raw=true)
 
+2. Register Screen
+![register](https://github.com/Soumajit2004/svvm-student-manager/blob/f0d324a2c697e206969a64390d50b6b6511553e1/screenshots/register_screen.png?raw=true)
 
+3. Student Profile Screen
+![profile](https://github.com/Soumajit2004/svvm-student-manager/blob/f0d324a2c697e206969a64390d50b6b6511553e1/screenshots/student_profile_screen.png?raw=true)
+
+4. Select Test Screen
+![select_test](https://github.com/Soumajit2004/svvm-student-manager/blob/f0d324a2c697e206969a64390d50b6b6511553e1/screenshots/select_test_screen.png?raw=true)
+
+5. Edit Marks Screen
+![edit_marks](https://github.com/Soumajit2004/svvm-student-manager/blob/f0d324a2c697e206969a64390d50b6b6511553e1/screenshots/edit_marks_screen.png?raw=true)
 
 These screenshots provide a visual overview of the system's functionality and user interface.
 
