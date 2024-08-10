@@ -1,12 +1,13 @@
 import mysql.connector
 import shortuuid
 from data import exam_code_map, sub_codes_map
+from env import DATABASE, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT, DATABASE_USER
 
-students_db = mysql.connector.connect(user="root",
-                                      password="strong_password",
-                                      host="127.0.0.1",
-                                      port=3307,
-                                      database="sms")
+students_db = mysql.connector.connect(user=DATABASE_USER,
+                                      password=DATABASE_PASSWORD,
+                                      host=DATABASE_HOST,
+                                      port=DATABASE_PORT,
+                                      database=DATABASE)
 cursor = students_db.cursor()
 
 

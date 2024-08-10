@@ -4,8 +4,10 @@
 /Scripts/
 /sms_datagrip_project/
 /env/
-/.idea/
+.idea/
 */__pycache__/*
 *.pyc
 /dist/
 /build/
+
+.env
