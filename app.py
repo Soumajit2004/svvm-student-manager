@@ -4,7 +4,6 @@ from flask import Flask
 from flask import render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect
-from flaskwebgui import FlaskUI
 
 from data import sub_codes_map, exam_code_map
 from form import StudentSearchForm, StudentEditAddForm, MarksEditForm
@@ -161,6 +160,4 @@ def own_404_page(_error):
 
 
 if __name__ == "__main__":
-    FlaskUI(app,
-            width=1080,
-            height=720).run()
+    app.run()
