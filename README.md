@@ -43,6 +43,9 @@ This is a simple ERP (Enterprise Resource Planning) system designed for small sc
    ```
 
 5. Create the necessary database and tables by running the migration script:
+   
+   get it from here: [migration.sql](https://github.com/Soumajit2004/svvm-student-manager/blob/70b947a72138015f44cf59ed4bf5127f8a1a9c32/migration.sql)
+   
    ```
    mysql> source [PATH_TO_MIGRATION_SQL_FILE]
    ```
